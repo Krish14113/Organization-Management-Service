@@ -99,7 +99,7 @@ curl -s -X DELETE "http://localhost:8000/org/delete?organization_name=TestOrg"  
 Diagram.png included in repository.
 
 
-## Brief Notes
+## Brief Notes for Design Choices
 ### 1. FastAPI for Backend
 FastAPI is chosen because it is fast, modern, and automatically generates OpenAPI/Swagger documentation.<br>
 Its async-first architecture pairs well with MongoDB’s async driver (`motor`), improving performance and scalability.
