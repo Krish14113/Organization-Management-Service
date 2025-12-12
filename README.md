@@ -100,34 +100,58 @@ Diagram.png included in repository.
 
 
 ## Brief Notes
-1. FastAPI for Backend
-Chosen because it is fast, modern, and automatically generates API docs.
-It supports async operations, which pairs well with MongoDB’s async driver (motor).
-2. MongoDB + Motor
-MongoDB is schema-flexible, making it suitable for multi-tenant data.
-Motor provides non-blocking async access, improving performance with FastAPI.
-3. Master Database Structure
-A single master DB stores:
-organizations → org metadata
-admins → admin login credentials
-This centralizes tenant management and keeps indexing simple.
-4. Dynamic Collection per Organization
-Each organization gets a collection named org_<cleaned_name>.
-This provides lightweight isolation without needing multiple databases.
-5. JWT Authentication
-JWT tokens allow stateless authentication.
-Tokens include admin_id and org_id so the backend can authorize org-specific actions.
-6. Password Hashing with bcrypt
-bcrypt is secure but limited to 72 bytes.
-We safely truncate passwords before hashing to avoid runtime errors.
-7. Docker & docker-compose
-Used for running the backend and MongoDB consistently across machines.
-Ensures reviewers can reproduce the environment easily.
-8. Simplicity and Limitations
-This design prioritizes clarity and meeting assignment requirements.
-Limitations:
-Renaming collections may require Mongo admin privileges.
-Collection-per-tenant provides basic separation but not full isolation (acceptable for prototype).
+### 1. FastAPI for Backend
+FastAPI is chosen because it is fast, modern, and automatically generates OpenAPI/Swagger documentation.<br>
+Its async-first architecture pairs well with MongoDB’s async driver (`motor`), improving performance and scalability.
+
+---
+
+### 2. MongoDB + Motor
+MongoDB’s schema flexibility makes it ideal for multi-tenant systems where each organization may store different structures.<br>
+Motor provides non-blocking asynchronous access, which fits naturally with FastAPI’s async request handling.
+
+---
+
+### 3. Master Database Structure
+A single **master database** stores:<br>
+• `organizations` → organization metadata<br>
+• `admins` → admin login credentials<br>
+This centralizes all tenant information, simplifies indexing, and makes it easy to map incoming requests to their organizations.
+
+---
+
+### 4. Dynamic Collection per Organization
+Each organization gets its own collection named `org_<cleaned_name>`.<br>
+This gives lightweight isolation between tenants without the complexity of provisioning multiple databases.
+
+---
+
+### 5. JWT Authentication
+Authentication uses JSON Web Tokens (JWT), allowing stateless and scalable authorization.<br>
+Each token includes both `admin_id` and `org_id`, enabling the backend to authorize organization-specific operations without repeated database lookups.
+
+---
+
+### 6. Password Hashing with bcrypt
+bcrypt is secure and widely used, but limited to 72 bytes.<br>
+To prevent runtime errors, password inputs are safely truncated before hashing while maintaining strong security.
+
+---
+
+### 7. Docker & Docker Compose
+Docker ensures consistent environment setup across different machines.<br>
+Docker Compose runs FastAPI + MongoDB together, making the project easy to test, run, and review for the assignment.
+
+---
+
+### 8. Simplicity and Limitations
+This architecture intentionally prioritizes clarity and assignment requirements.<br>
+However, some limitations exist:
+
+- Renaming collections can require elevated MongoDB privileges.<br>
+- The “collection-per-tenant” model offers basic separation but **not full isolation**, which is acceptable for a prototype but not ideal for large-scale production.
+
+---
 
 
 ## Do I think this is a good architecture with a scalable design?
