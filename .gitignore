@@ -1,0 +1,69 @@
+# -------- Python --------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Byte-compiled / optimized / DLL files
+*.egg
+*.egg-info/
+.eggs/
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# pyenv
+.python-version
+
+# Jupyter notebooks
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# macOS system files
+.DS_Store
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+
+# Migrations (if using Django; remove if not needed)
+**/migrations/
+
+# Coverage / test reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.nox/
+pytest_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Uvicorn / Gunicorn temp files
+*.pid
+
+# MongoDB dump files
+dump/
+
+# IDE folders
+.idea/
+.pytest_cache/
